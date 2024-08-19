@@ -2,7 +2,9 @@
   "name": "@finz/source",
   "version": "0.0.0",
   "license": "MIT",
-  "scripts": {},
+  "scripts": {
+    "storybook": "nx run finz:storybook"
+  },
   "private": true,
   "dependencies": {
     "react": "18.3.1",
@@ -23,6 +25,13 @@
     "@nx/web": "19.6.0",
     "@nx/workspace": "19.6.0",
     "@playwright/test": "^1.36.0",
+    "@storybook/addon-essentials": "^8.2.8",
+    "@storybook/addon-interactions": "^8.2.8",
+    "@storybook/core-server": "^8.2.8",
+    "@storybook/jest": "^0.2.3",
+    "@storybook/react-vite": "^8.2.8",
+    "@storybook/test-runner": "^0.13.0",
+    "@storybook/testing-library": "^0.2.2",
     "@swc-node/register": "~1.9.1",
     "@swc/cli": "~0.3.12",
     "@swc/core": "~1.5.7",
