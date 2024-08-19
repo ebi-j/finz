@@ -14,7 +14,7 @@
     ],
     "sharedGlobals": ["{workspaceRoot}/.github/workflows/ci.yml"]
   },
-  "nxCloudAccessToken": "ZjhiMzdlMjUtMDA4Yi00Njg0LTgzYmEtNjk5MzA4OTkwYmIwfHJlYWQtd3JpdGU=",
+  "nxCloudAccessToken": "NDA2NzM0NTctNjAzMy00ODcxLTkyMzgtZjE1NjM4MzBiNWQyfHJlYWQtd3JpdGU=",
   "plugins": [
     {
       "plugin": "@nx/vite/plugin",
@@ -43,6 +43,15 @@
       "options": {
         "targetName": "test"
       }
+    },
+    {
+      "plugin": "@nx/storybook/plugin",
+      "options": {
+        "serveStorybookTargetName": "storybook",
+        "buildStorybookTargetName": "build-storybook",
+        "testStorybookTargetName": "test-storybook",
+        "staticStorybookTargetName": "static-storybook"
+      }
     }
   ],
   "targetDefaults": {
@@ -66,5 +75,6 @@
         "linter": "eslint"
       }
     }
-  }
+  },
+  "defaultBase": "main"
 }
