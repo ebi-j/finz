@@ -1,5 +1,5 @@
 type PropertyProps = {
-  propertyName: string
+	propertyName: string;
 };
 
-export const Property = ({ propertyName }: PropertyProps) => (<div>{propertyName}</div>);
+export const Property = ({ propertyName }: PropertyProps) => <div>{propertyName}</div>;
