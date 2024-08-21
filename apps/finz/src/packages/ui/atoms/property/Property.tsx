@@ -1,5 +1,7 @@
-type PropertyProps = {
-	propertyName: string;
+interface PropertyProps {
+	name: string;
 };
 
-export const Property = ({ propertyName }: PropertyProps) => <div>{propertyName}</div>;
+const Property = ({ name }: PropertyProps) => <div>{name}</div>;
+
+export { Property };

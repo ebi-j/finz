@@ -11,6 +11,6 @@ type Story = StoryObj<typeof Property>;
 
 export const Default: Story = {
 	args: {
-		propertyName: 'Property 1',
+		name: 'Property 1',
 	},
 };
