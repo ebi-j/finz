@@ -3,6 +3,7 @@
 	"version": "0.0.0",
 	"license": "MIT",
 	"scripts": {
+		"start": "nx serve finz",
 		"storybook": "nx run finz:storybook",
 		"format:check": "npx prettier --check \"apps/**/*.{tsx,ts,js,jsx}\"",
 		"format": "npx prettier --write \"apps/**/*.{tsx,ts,js,jsx}\"",
