@@ -5,11 +5,11 @@ import { PropertyStateList } from '../../../shared/models';
 const meta: Meta<typeof Property> = {
 	component: Property,
 	argTypes: {
-    state: {
-      options: PropertyStateList,
-      control: { type: 'select' },
-    }
-  }
+		state: {
+			options: PropertyStateList,
+			control: { type: 'select' },
+		},
+	},
 };
 
 export default meta;
