@@ -32,4 +32,9 @@ export default defineConfig({
 			transformMixedEsModules: true,
 		},
 	},
+
+	test: {
+		globals: true,
+		environment: 'jsdom',
+	},
 });
