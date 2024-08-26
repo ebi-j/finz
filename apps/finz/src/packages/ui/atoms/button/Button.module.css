@@ -1,0 +1,7 @@
+.btn-icon-primary {
+  @apply text-color-primary;
+}
+
+.btn-icon-primary:hover {
+  @apply text-teal-700;
+}

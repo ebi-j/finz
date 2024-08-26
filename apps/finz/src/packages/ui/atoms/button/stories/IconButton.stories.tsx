@@ -25,6 +25,8 @@ export const Default: Story = {
 	name: 'Icon Button',
 	args: {
 		title: 'add',
+		variant: 'primary',
+		size: 'm',
 		children: <SquareAdd />,
 	},
 };
