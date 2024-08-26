@@ -10,3 +10,7 @@
 .leading-page-title {
   line-height: 3rem;
 }
+
+.text-color-primary {
+  @apply text-teal-600;
+}

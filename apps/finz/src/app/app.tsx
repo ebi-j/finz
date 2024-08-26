@@ -1,9 +1,9 @@
-import NxWelcome from './nx-welcome';
+import { MainContent } from './main-content';
 
 export function App() {
 	return (
 		<div>
-			<NxWelcome title="finz" />
+			<MainContent />
 		</div>
 	);
 }
