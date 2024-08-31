@@ -9,3 +9,7 @@
 .m {
   @apply min-w-[320px];
 }
+
+.title-info {
+  @apply text-color-primary;
+}

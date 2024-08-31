@@ -1,37 +1,34 @@
-import { Variant } from '../../shared/models';
-
 interface TypographyProps extends Omit<React.ComponentProps<'div'>, 'children'> {
 	children: string;
-	variant?: Variant;
 }
 const baseCommonClasses = 'font-sans';
 
-const PageTitle = ({ children, variant = 'default', ...other }: TypographyProps) => (
-	<div className={`${baseCommonClasses} text-color-${variant} text-2rem font-bold leading-3rem`} {...other}>
+const PageTitle = ({ children, className, ...other }: TypographyProps) => (
+	<div className={`${baseCommonClasses} text-2rem font-bold leading-3rem ${className}`} {...other}>
 		{children}
 	</div>
 );
 
-const PageSubTitle = ({ children, variant = 'default', ...other }: TypographyProps) => (
-	<div className={`${baseCommonClasses} text-color-${variant} text-2xl font-bold leading-8`} {...other}>
+const PageSubTitle = ({ children, className, ...other }: TypographyProps) => (
+	<div className={`${baseCommonClasses} text-2xl font-bold leading-8 ${className}`} {...other}>
 		{children}
 	</div>
 );
 
-const SectionTitle = ({ children, variant = 'default', ...other }: TypographyProps) => (
-	<div className={`${baseCommonClasses} text-color-${variant} text-lg font-bold leading-7`} {...other}>
+const SectionTitle = ({ children, className, ...other }: TypographyProps) => (
+	<div className={`${baseCommonClasses} text-lg font-bold leading-7 ${className}`} {...other}>
 		{children}
 	</div>
 );
 
-const BodyRegular = ({ children, variant = 'default', ...other }: TypographyProps) => (
-	<div className={`${baseCommonClasses} text-color-${variant} text-sm font-normal leading-5`} {...other}>
+const BodyRegular = ({ children, className, ...other }: TypographyProps) => (
+	<div className={`${baseCommonClasses} text-sm font-normal leading-5 ${className}`} {...other}>
 		{children}
 	</div>
 );
 
-const BodyBold = ({ children, variant = 'default', ...other }: TypographyProps) => (
-	<div className={`${baseCommonClasses} text-color-${variant} text-sm font-bold leading-5`} {...other}>
+const BodyBold = ({ children, className, ...other }: TypographyProps) => (
+	<div className={`${baseCommonClasses} text-sm font-bold leading-5 ${className}`} {...other}>
 		{children}
 	</div>
 );

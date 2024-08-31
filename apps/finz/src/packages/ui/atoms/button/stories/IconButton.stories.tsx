@@ -21,7 +21,7 @@ const meta: Meta<typeof IconButton> = {
 export default meta;
 type Story = StoryObj<typeof IconButton>;
 
-export const Default: Story = {
+export const IconButtonStory: Story = {
 	name: 'Icon Button',
 	args: {
 		title: 'add',

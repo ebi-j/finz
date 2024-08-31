@@ -9,7 +9,7 @@ interface IconButtonProps extends ButtonProps {
 }
 
 const IconButton = ({ children, variant = 'default', size = 'm', ...others }: IconButtonProps) => (
-	<Button className={styles[`btn-icon-${variant}`]} {...others}>
+	<Button className={`${styles[`btn-icon-${variant}`]} transition-all-300-ease-in-out`} {...others}>
 		{React.cloneElement(children, { size })}
 	</Button>
 );

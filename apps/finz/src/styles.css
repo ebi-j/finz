@@ -3,6 +3,10 @@
 @tailwind utilities;
 /* You can add global styles to this file, and also import other style files */
 
-.leading-page-title {
-  line-height: 3rem;
+.transition-all-300-ease-in-out {
+  @apply transition-all duration-300 ease-in-out;
+}
+
+.form-layout {
+  @apply flex flex-col gap-4;
 }

@@ -5,3 +5,35 @@
 .btn-icon-primary:hover {
   @apply text-teal-700;
 }
+
+.btn-base {
+  @apply p-2 rounded-md min-w-[36px];
+}
+
+.btn-default {
+  @apply bg-white btn-base;
+}
+
+.btn-default:hover {
+  @apply bg-gray-100;
+}
+
+.btn-primary {
+  @apply bg-color-primary text-white btn-base;
+}
+
+.btn-primary:hover {
+  @apply bg-teal-700;
+}
+
+.l {
+  @apply text-2xl;
+}
+
+.m {
+  @apply text-lg;
+}
+
+.s {
+  @apply text-sm;
+}

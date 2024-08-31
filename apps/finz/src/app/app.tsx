@@ -1,10 +1,13 @@
+import { DialogProvider } from '../packages/ui/organisms/dialog/context';
 import { MainContent } from './main-content';
 
 export function App() {
 	return (
-		<div>
-			<MainContent />
-		</div>
+		<DialogProvider>
+			<div>
+				<MainContent />
+			</div>
+		</DialogProvider>
 	);
 }
 

@@ -16,6 +16,9 @@ module.exports = {
 			fontSize: {
 				'2rem': '2rem',
 			},
+			lineHeight: {
+				'3rem': '3rem',
+			},
 		},
 	},
 	plugins: [],
