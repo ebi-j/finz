@@ -1,3 +1,4 @@
+import { PropertyState } from "@finz/lib";
 import { UUID } from "crypto";
 
 export class Column {
@@ -6,4 +7,5 @@ export class Column {
   public name: string;
   public createdAt: Date;
   public updatedAt: Date;
+  public state: PropertyState;
 }
