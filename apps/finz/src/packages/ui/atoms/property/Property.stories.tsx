@@ -1,12 +1,12 @@
 import type { Meta, StoryObj } from '@storybook/react';
 import { Property } from './Property';
-import { PropertyStateList } from '../../../shared/models';
+import { PropertyState, PropertyStateList } from '@finz/lib';
 
 const meta: Meta<typeof Property> = {
 	component: Property,
 	argTypes: {
 		state: {
-			options: PropertyStateList,
+			options: PropertyStateList as readonly PropertyState[],
 			control: { type: 'select' },
 		},
 	},

@@ -1,13 +1,13 @@
 import type { Meta, StoryObj } from '@storybook/react';
 
 import { Table } from './Table';
-import { TableStateList } from '../../../shared/models';
+import { TableState, TableStateList } from '@finz/lib';
 
 const meta: Meta<typeof Table> = {
 	component: Table,
 	argTypes: {
 		state: {
-			options: TableStateList,
+			options: TableStateList as readonly TableState[],
 			control: { type: 'select' },
 		},
 	},

@@ -1,7 +1,7 @@
 import { Property, PropertyProps } from '../../atoms/property/Property';
 import { SectionTitle } from '../../atoms/typography/Typography';
 import styles from './Table.module.css';
-import { TableState } from '../../../shared/models';
+import { TableState } from '@finz/lib';
 
 interface TableProps {
 	name: string;

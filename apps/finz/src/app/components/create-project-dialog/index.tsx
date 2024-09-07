@@ -1,12 +1,13 @@
-import { FieldValues, useForm } from 'react-hook-form';
+import { useForm } from 'react-hook-form';
 import { Input } from '../../../packages/ui/molecules/input/Input';
 import { Button } from '../../../packages/ui/atoms/button/Button';
 import { Dialog } from '../../../packages/ui/organisms/dialog/Dialog';
 import { useContext } from 'react';
 import { DialogContext } from '../../../packages/ui/organisms/dialog/context';
+import { post } from '../../../packages/shared/httpUtil';
 
-interface FormData extends FieldValues {
-	projectName: string;
+interface FormData {
+	name: string;
 }
 
 export const useCreateProjectDialog = () => {
@@ -31,9 +32,14 @@ export const useCreateProjectDialog = () => {
 		} = useForm<FormData>();
 		const { close } = useContext(DialogContext);
 
-		const onSubmit = (data: FormData): void => {
-			console.debug(data);
-			close(dialogName);
+		const onSubmit = async (data: FormData): Promise<void> => {
+			try {
+				const result = await post<{ name: string }>('/projects', { name: data.name });
+				console.debug('Project created:', result);
+				close(dialogName);
+			} catch (error) {
+				console.error('Error creating project:', error);
+			}
 		};
 
 		const handleClose = () => {
@@ -46,8 +52,8 @@ export const useCreateProjectDialog = () => {
 					<Input
 						label="Project Name"
 						placeholder="Enter project name"
-						{...register('projectName', { required: 'Project name is required' })}
-						error={errors.projectName?.message}
+						{...register('name', { required: 'Project name is required' })}
+						error={errors.name?.message}
 					/>
 					<div className="flex gap-4 justify-end">
 						<Button type="button" onClick={handleClose}>

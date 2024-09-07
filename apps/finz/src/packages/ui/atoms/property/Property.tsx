@@ -1,4 +1,4 @@
-import { PropertyState } from '../../../shared/models';
+import { PropertyState } from '@finz/lib';
 import { BodyRegular } from '../typography/Typography';
 
 interface PropertyProps {
