@@ -4,58 +4,75 @@ import { UUID } from 'crypto';
 import { CreateProjectRequest } from './request/CreateProjectRequest';
 import { PatchProjectRequest } from './request/PatchProjectRequest';
 import { ProjectsService } from './projects.service';
-import { ApiParam, ApiQuery, ApiTags, ApiOperation, ApiOkResponse, ApiBadRequestResponse, ApiNotFoundResponse, ApiInternalServerErrorResponse, ApiBody } from '@nestjs/swagger';
+import {
+	ApiParam,
+	ApiQuery,
+	ApiTags,
+	ApiOperation,
+	ApiOkResponse,
+	ApiBadRequestResponse,
+	ApiNotFoundResponse,
+	ApiInternalServerErrorResponse,
+	ApiBody,
+	ApiCreatedResponse,
+} from '@nestjs/swagger';
+import { ProjectCreatedResponse } from './response/ProjectCreatedResponse';
 
 @Controller('projects')
 @ApiTags('Projects')
 export class ProjectsController {
-  constructor(private readonly projectsService: ProjectsService) { }
+	constructor(private readonly projectsService: ProjectsService) {}
 
-  @Get()
-  @ApiOperation({
-    summary: 'Get all projects',
-    description: 'Get all projects with pagination',
-  })
-  @ApiQuery({ name: 'page', type: Number, description: 'Page number', required: false })
-  @ApiQuery({ name: 'limit', type: Number, description: 'Number of items per page', required: false })
-  @ApiOkResponse({ description: 'Projects fetched successfully' })
-  @ApiBadRequestResponse({ description: 'Invalid filter' })
-  @ApiNotFoundResponse({ description: 'Projects not found' })
-  @ApiInternalServerErrorResponse({ description: 'Internal server error' })
-  public getProjects(@Query() { page, limit }: BaseFilter) {
-    console.debug(typeof page, typeof limit);
-    return [];
-  }
+	@Get()
+	@ApiOperation({
+		summary: 'Get all projects',
+		description: 'Get all projects with pagination',
+	})
+	@ApiQuery({ name: 'page', type: Number, description: 'Page number', required: false })
+	@ApiQuery({ name: 'limit', type: Number, description: 'Number of items per page', required: false })
+	@ApiOkResponse({ description: 'Projects fetched successfully' })
+	@ApiBadRequestResponse({ description: 'Invalid filter' })
+	@ApiNotFoundResponse({ description: 'Projects not found' })
+	@ApiInternalServerErrorResponse({ description: 'Internal server error' })
+	public getProjects(@Query() { page, limit }: BaseFilter) {
+		console.debug(typeof page, typeof limit);
+		return [];
+	}
 
-  @Post()
-  @ApiOperation({
-    summary: 'Create a new project',
-    description: 'Create a new project with the given name',
-  })
-  @ApiBody({ type: CreateProjectRequest })
-  @ApiOkResponse({ description: 'Project created successfully' })
-  @ApiBadRequestResponse({ description: 'Invalid request body' })
-  @ApiInternalServerErrorResponse({ description: 'Internal server error' })
-  public createProject(@Body() createProjectRequest: CreateProjectRequest) {
-    return createProjectRequest;
-  }
+	@Post()
+	@ApiOperation({
+		summary: 'Create a new project',
+		description: 'Create a new project with the given name',
+	})
+	@ApiBody({ type: CreateProjectRequest })
+	@ApiCreatedResponse({ description: 'Project created successfully' })
+	@ApiBadRequestResponse({ description: 'Invalid request body' })
+	@ApiInternalServerErrorResponse({ description: 'Internal server error' })
+	public async createProject(@Body() createProjectRequest: CreateProjectRequest): Promise<ProjectCreatedResponse> {
+		return this.projectsService.createProject(createProjectRequest);
+	}
 
-  @Get(':id')
-  @ApiParam({ name: 'id', type: String })
-  public getProjectById(@Param('id', ParseUUIDPipe) id: UUID) {
-    console.debug(typeof id);
-    return { id };
-  }
+	@Get(':id')
+	@ApiParam({ name: 'id', type: String })
+	public getProjectById(@Param('id', ParseUUIDPipe) id: UUID) {
+		console.debug(typeof id);
+		return { id };
+	}
 
-  @Patch(':id')
-  @ApiParam({ name: 'id', type: String })
-  public updateProject(@Param('id', ParseUUIDPipe) id: UUID, @Body() patchProjectRequest: PatchProjectRequest) {
-    return { id, patchProjectRequest };
-  }
+	@Patch(':id')
+	@ApiParam({ name: 'id', type: String })
+	@ApiBody({ type: PatchProjectRequest })
+	@ApiOkResponse({ description: 'Project updated successfully' })
+	@ApiBadRequestResponse({ description: 'Invalid request body' })
+	@ApiNotFoundResponse({ description: 'Project not found' })
+	@ApiInternalServerErrorResponse({ description: 'Internal server error' })
+	public updateProject(@Param('id', ParseUUIDPipe) id: UUID, @Body() patchProjectRequest: PatchProjectRequest) {
+		return { id, patchProjectRequest };
+	}
 
-  @Delete(':id')
-  @ApiParam({ name: 'id', type: String })
-  public deleteProject(@Param('id', ParseUUIDPipe) id: UUID) {
-    return { id };
-  }
+	@Delete(':id')
+	@ApiParam({ name: 'id', type: String })
+	public deleteProject(@Param('id', ParseUUIDPipe) id: UUID) {
+		return { id };
+	}
 }
