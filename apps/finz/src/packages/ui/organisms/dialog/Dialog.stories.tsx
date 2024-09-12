@@ -30,7 +30,7 @@ export const Default: Story = {
 		type: 'info',
 	},
 	render: (args: DialogProps) => (
-		<DialogProvider>
+		<DialogProvider states={{ dialog: true }}>
 			<Dialog {...args} />
 		</DialogProvider>
 	),

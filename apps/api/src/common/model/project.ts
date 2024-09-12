@@ -10,8 +10,10 @@ export class Project {
 	public updatedAt: Date;
 	public tables: Table[];
 
-	constructor(name: string) {
+	constructor(id: UUID, name: string, tables: Table[]) {
+		this.id = id;
 		this.name = name;
+		this.tables = tables;
 	}
 
 	public toEntity(): ProjectEntity {

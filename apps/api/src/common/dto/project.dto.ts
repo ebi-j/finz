@@ -1,8 +1,8 @@
 import { UUID } from 'crypto';
 
-export class ProjectDto {
-	public id: UUID;
-	public name: string;
-	public createdAt: Date;
-	public updatedAt: Date;
+export interface ProjectDto {
+	id: UUID;
+	name: string;
+	createdAt: Date;
+	updatedAt: Date;
 }

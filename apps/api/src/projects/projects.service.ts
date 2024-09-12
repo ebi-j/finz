@@ -1,19 +1,27 @@
 import { Injectable } from '@nestjs/common';
 import { BaseFilter } from '../common/dto/BaseFilter';
-import { Project } from '../common/model/project';
-import { CommandBus } from '@nestjs/cqrs';
+import { CommandBus, QueryBus } from '@nestjs/cqrs';
 import { CreateProjectRequest } from './request/CreateProjectRequest';
 import { CreateProject } from '../common/command/project/CreateProject';
 import { ProjectCreatedResponse } from './response/ProjectCreatedResponse';
 import { ProjectDto } from '../common/dto';
+import { GetProjects } from '../common/query/project/GetProjects';
+import { ProjectResponse } from './response/ProjectResponse';
 
 @Injectable()
 export class ProjectsService {
-	constructor(private readonly commandBus: CommandBus) {}
+	constructor(private readonly queryBus: QueryBus, private readonly commandBus: CommandBus) {}
 
-	public findProjects(filter: BaseFilter): Project[] {
-		console.log(filter);
-		return [];
+	public async findProjects(filter: BaseFilter): Promise<ProjectResponse[]> {
+		const command = new GetProjects(filter);
+		const projectDtos = await this.queryBus.execute<GetProjects, ProjectDto[]>(command);
+		return projectDtos.map(
+			(p) =>
+				({
+					id: p.id,
+					name: p.name,
+				} as ProjectResponse),
+		);
 	}
 
 	public async createProject(request: CreateProjectRequest): Promise<ProjectCreatedResponse> {

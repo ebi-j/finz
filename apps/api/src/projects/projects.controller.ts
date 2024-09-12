@@ -17,6 +17,7 @@ import {
 	ApiCreatedResponse,
 } from '@nestjs/swagger';
 import { ProjectCreatedResponse } from './response/ProjectCreatedResponse';
+import { filter } from 'rxjs';
 
 @Controller('projects')
 @ApiTags('Projects')
@@ -34,9 +35,8 @@ export class ProjectsController {
 	@ApiBadRequestResponse({ description: 'Invalid filter' })
 	@ApiNotFoundResponse({ description: 'Projects not found' })
 	@ApiInternalServerErrorResponse({ description: 'Internal server error' })
-	public getProjects(@Query() { page, limit }: BaseFilter) {
-		console.debug(typeof page, typeof limit);
-		return [];
+	public async getProjects(@Query() filter: BaseFilter) {
+		return this.projectsService.findProjects(filter);
 	}
 
 	@Post()

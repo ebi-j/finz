@@ -20,8 +20,14 @@ export const useDialog = (name: string) => {
 	return context;
 };
 
-export const DialogProvider = ({ children }: { children: React.ReactNode | React.ReactNode[] }) => {
-	const [dialogStates, setDialogStates] = useState<Record<string, boolean>>({});
+export const DialogProvider = ({
+	states = {},
+	children,
+}: {
+	states?: Record<string, boolean>;
+	children: React.ReactNode | React.ReactNode[];
+}) => {
+	const [dialogStates, setDialogStates] = useState<Record<string, boolean>>(states);
 
 	const open = (name: string): void => {
 		setDialogStates((prev) => ({ ...prev, [name]: true }));
