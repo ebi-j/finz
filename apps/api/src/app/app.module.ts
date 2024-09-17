@@ -3,7 +3,6 @@ import { AppController } from './app.controller';
 import { AppService } from './app.service';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { ProjectsModule } from '../projects/projects.module';
-import { ProjectEntity } from '../common/entity';
 
 @Module({
 	imports: [
@@ -19,7 +18,7 @@ import { ProjectEntity } from '../common/entity';
 				password: 'password',
 				database: 'finz',
 				schema: 'public',
-				entities: [ProjectEntity],
+				autoLoadEntities: true,
 				synchronize: true,
 			}),
 		}),

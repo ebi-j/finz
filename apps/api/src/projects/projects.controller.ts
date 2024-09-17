@@ -17,7 +17,7 @@ import {
 	ApiCreatedResponse,
 } from '@nestjs/swagger';
 import { ProjectCreatedResponse } from './response/ProjectCreatedResponse';
-import { filter } from 'rxjs';
+import { ListViewModel, ProjectListItem } from '../common/view-model/ListViewModel';
 
 @Controller('projects')
 @ApiTags('Projects')
@@ -35,7 +35,7 @@ export class ProjectsController {
 	@ApiBadRequestResponse({ description: 'Invalid filter' })
 	@ApiNotFoundResponse({ description: 'Projects not found' })
 	@ApiInternalServerErrorResponse({ description: 'Internal server error' })
-	public async getProjects(@Query() filter: BaseFilter) {
+	public async getProjects(@Query() filter: BaseFilter): Promise<ListViewModel<ProjectListItem>> {
 		return this.projectsService.findProjects(filter);
 	}
 

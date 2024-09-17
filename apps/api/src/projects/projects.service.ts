@@ -6,22 +6,16 @@ import { CreateProject } from '../common/command/project/CreateProject';
 import { ProjectCreatedResponse } from './response/ProjectCreatedResponse';
 import { ProjectDto } from '../common/dto';
 import { GetProjects } from '../common/query/project/GetProjects';
-import { ProjectResponse } from './response/ProjectResponse';
+import { ListViewModel, ProjectListItem } from '../common/view-model/ListViewModel';
 
 @Injectable()
 export class ProjectsService {
 	constructor(private readonly queryBus: QueryBus, private readonly commandBus: CommandBus) {}
 
-	public async findProjects(filter: BaseFilter): Promise<ProjectResponse[]> {
+	public async findProjects(filter: BaseFilter): Promise<ListViewModel<ProjectListItem>> {
 		const command = new GetProjects(filter);
-		const projectDtos = await this.queryBus.execute<GetProjects, ProjectDto[]>(command);
-		return projectDtos.map(
-			(p) =>
-				({
-					id: p.id,
-					name: p.name,
-				} as ProjectResponse),
-		);
+		const projects = await this.queryBus.execute<GetProjects, ListViewModel<ProjectListItem>>(command);
+		return projects;
 	}
 
 	public async createProject(request: CreateProjectRequest): Promise<ProjectCreatedResponse> {
