@@ -1,3 +1,4 @@
 export * from './lib/lib';
-export * from './lib/contract/state';
-export * from './lib/contract/base-filter';
+export * from './lib/contract/State';
+export * from './lib/contract/BaseFilter';
+export * from './lib/contract/ListViewModel';

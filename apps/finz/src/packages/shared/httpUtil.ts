@@ -1,11 +1,11 @@
 const BASE_URL = 'http://localhost:3000/api';
 
-export const get = async (url: string) => {
+export const get = async <T>(url: string): Promise<T> => {
 	const response = await fetch(`${BASE_URL}${url}`);
-	return response.json();
+	return response.json() as Promise<T>;
 };
 
-export const post = async <TData extends object>(url: string, data: TData): Promise<TData> => {
+export const post = async <T>(url: string, data: T): Promise<T> => {
 	const response = await fetch(`${BASE_URL}${url}`, {
 		method: 'POST',
 		headers: {
@@ -13,5 +13,5 @@ export const post = async <TData extends object>(url: string, data: TData): Prom
 		},
 		body: JSON.stringify(data),
 	});
-	return response.json() as Promise<TData>;
+	return response.json() as Promise<T>;
 };

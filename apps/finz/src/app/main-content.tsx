@@ -2,9 +2,13 @@ import { PageSubTitle } from '../packages/ui/atoms/typography/Typography';
 import { SquareAdd } from '../packages/ui/atoms/icon/Icons';
 import { IconButton } from '../packages/ui/atoms/button/IconButton';
 import { useCreateProjectDialog } from './components/create-project-dialog';
+import { useProjects } from './hooks/useProjects';
 
 const MainContent = () => {
+	const { isLoading: isProjectsRequestLoading, projects } = useProjects();
 	const { CreateProjectDialog, openCreateProjectDialog } = useCreateProjectDialog();
+
+	console.debug(projects, isProjectsRequestLoading);
 
 	return (
 		<div className="flex h-screen">

@@ -17,7 +17,7 @@ import {
 	ApiCreatedResponse,
 } from '@nestjs/swagger';
 import { ProjectCreatedResponse } from './response/ProjectCreatedResponse';
-import { ListViewModel, ProjectListItem } from '../common/view-model/ListViewModel';
+import { ListViewModel, ProjectListItem } from '@finz/lib';
 
 @Controller('projects')
 @ApiTags('Projects')

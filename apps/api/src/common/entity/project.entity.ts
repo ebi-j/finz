@@ -1,7 +1,8 @@
-import { Column, Entity } from 'typeorm';
+import { Column, Entity, OneToMany } from 'typeorm';
 import { BaseEntity } from './base.entity';
 import { Project } from '../model/project';
 import { ProjectDto } from '../dto';
+import { TableEntity } from './table.entity';
 
 @Entity('projects')
 export class ProjectEntity extends BaseEntity {
@@ -10,7 +11,10 @@ export class ProjectEntity extends BaseEntity {
 		length: 255,
 		nullable: false,
 	})
-	name: string;
+	public name: string;
+
+	@OneToMany(() => TableEntity, (table) => table.project)
+	public tables: TableEntity[];
 
 	constructor(name: string) {
 		super();

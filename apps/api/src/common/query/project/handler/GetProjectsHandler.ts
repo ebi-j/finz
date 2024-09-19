@@ -3,7 +3,7 @@ import { GetProjects } from '../GetProjects';
 import { ProjectEntity } from '../../../entity';
 import { Repository } from 'typeorm';
 import { InjectRepository } from '@nestjs/typeorm';
-import { ListViewModel, ProjectListItem } from '../../../view-model/ListViewModel';
+import { ListViewModel, ProjectListItem } from '@finz/lib';
 
 @QueryHandler(GetProjects)
 export class GetProjectsHandler implements IQueryHandler<GetProjects> {

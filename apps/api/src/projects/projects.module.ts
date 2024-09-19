@@ -6,12 +6,13 @@ import { CqrsModule } from '@nestjs/cqrs';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { ProjectEntity } from '../common/entity';
 import { GetProjectsHandler } from '../common/query/project/handler/GetProjectsHandler';
+import { TableEntity } from '../common/entity/table.entity';
 
 const commandHandlers = [CreateProjectHandler];
 const queryHandlers = [GetProjectsHandler];
 
 @Module({
-	imports: [CqrsModule, TypeOrmModule.forFeature([ProjectEntity])],
+	imports: [CqrsModule, TypeOrmModule.forFeature([ProjectEntity, TableEntity])],
 	providers: [ProjectsService, ...commandHandlers, ...queryHandlers],
 	controllers: [ProjectsController],
 })

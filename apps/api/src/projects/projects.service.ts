@@ -6,7 +6,11 @@ import { CreateProject } from '../common/command/project/CreateProject';
 import { ProjectCreatedResponse } from './response/ProjectCreatedResponse';
 import { ProjectDto } from '../common/dto';
 import { GetProjects } from '../common/query/project/GetProjects';
-import { ListViewModel, ProjectListItem } from '../common/view-model/ListViewModel';
+import { PatchProjectRequest } from './request/PatchProjectRequest';
+import { UUID } from 'crypto';
+import { PatchProject } from '../common/command/project/PatchProject';
+import { ProjectPatchedResponse } from './response/ProjectPatchedResponse';
+import { ListViewModel, ProjectListItem } from '@finz/lib';
 
 @Injectable()
 export class ProjectsService {
@@ -27,5 +31,15 @@ export class ProjectsService {
 			createdAt: projectDto.createdAt,
 			updatedAt: projectDto.updatedAt,
 		} as ProjectCreatedResponse;
+	}
+
+	public async patchProject(id: UUID, request: PatchProjectRequest): Promise<ProjectPatchedResponse> {
+		const command = new PatchProject(id, request.name);
+		const projectDto = await this.commandBus.execute<PatchProject, ProjectDto>(command);
+		return {
+			id: projectDto.id,
+			name: projectDto.name,
+			updatedAt: projectDto.updatedAt,
+		} as ProjectPatchedResponse;
 	}
 }
