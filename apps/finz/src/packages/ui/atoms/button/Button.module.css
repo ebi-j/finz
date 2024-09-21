@@ -26,6 +26,22 @@
   @apply bg-teal-700;
 }
 
+.btn-text {
+  @apply btn-base bg-white;
+}
+
+.btn-text:hover {
+  @apply bg-teal-50;
+}
+
+.btn-warn {
+  @apply btn-base bg-white text-red-700;
+}
+
+.btn-warn:hover {
+  @apply bg-red-50;
+}
+
 .l {
   @apply text-2xl;
 }

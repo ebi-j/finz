@@ -3,26 +3,34 @@ import { useEffect, useState } from 'react';
 import { get } from '../../packages/shared/httpUtil';
 
 const useProjects = () => {
-	const [isLoading, setIsLoading] = useState(false);
-	const [projects, setProjects] = useState<ListViewModel<ProjectListItem>>();
+	const [isLoading, setIsLoading] = useState(true);
+	const [shouldReload, setShouldReload] = useState(true);
+	const [projects, setProjects] = useState<ListViewModel<ProjectListItem>>({
+		items: [],
+		total: 0,
+		limit: 10,
+		page: 0,
+	});
 
 	useEffect(() => {
 		const fetchData = async () => {
 			try {
-				setIsLoading(true);
 				const result = await get<ListViewModel<ProjectListItem>>('/projects');
 				setProjects(result);
 			} catch (error) {
 				console.error('Error loading projects:', error);
 			} finally {
 				setIsLoading(false);
+				setShouldReload(false);
 			}
 		};
 
-		fetchData();
-	}, []);
+		if (shouldReload) {
+			fetchData();
+		}
+	}, [shouldReload]);
 
-	return { isLoading, projects };
+	return { isLoading, setShouldReload, projects };
 };
 
 export { useProjects };

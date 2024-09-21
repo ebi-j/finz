@@ -10,7 +10,11 @@ interface FormData {
 	name: string;
 }
 
-export const useCreateProjectDialog = () => {
+interface UseCreateProjectDialogProps {
+	onCreated: () => void;
+}
+
+export const useCreateProjectDialog = ({ onCreated }: UseCreateProjectDialogProps) => {
 	const dialogName = 'create-project';
 	const { open, close, isOpen } = useContext(DialogContext);
 
@@ -37,6 +41,7 @@ export const useCreateProjectDialog = () => {
 				const result = await post<{ name: string }>('/projects', { name: data.name });
 				console.debug('Project created:', result);
 				close(dialogName);
+				onCreated();
 			} catch (error) {
 				console.error('Error creating project:', error);
 			}
