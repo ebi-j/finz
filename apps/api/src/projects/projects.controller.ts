@@ -66,8 +66,8 @@ export class ProjectsController {
 	@ApiBadRequestResponse({ description: 'Invalid request body' })
 	@ApiNotFoundResponse({ description: 'Project not found' })
 	@ApiInternalServerErrorResponse({ description: 'Internal server error' })
-	public updateProject(@Param('id', ParseUUIDPipe) id: UUID, @Body() patchProjectRequest: PatchProjectRequest) {
-		return { id, patchProjectRequest };
+	public async updateProject(@Param('id', ParseUUIDPipe) id: UUID, @Body() patchProjectRequest: PatchProjectRequest) {
+		return this.projectsService.patchProject(id, patchProjectRequest);
 	}
 
 	@Delete(':id')

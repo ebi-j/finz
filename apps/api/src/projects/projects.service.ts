@@ -35,6 +35,7 @@ export class ProjectsService {
 
 	public async patchProject(id: UUID, request: PatchProjectRequest): Promise<ProjectPatchedResponse> {
 		const command = new PatchProject(id, request.name);
+		console.log(command);
 		const projectDto = await this.commandBus.execute<PatchProject, ProjectDto>(command);
 		return {
 			id: projectDto.id,

@@ -3,6 +3,7 @@ import { BaseEntity } from './base.entity';
 import { Project } from '../model/project';
 import { ProjectDto } from '../dto';
 import { TableEntity } from './table.entity';
+import { UUID } from 'crypto';
 
 @Entity('projects')
 export class ProjectEntity extends BaseEntity {
@@ -16,8 +17,9 @@ export class ProjectEntity extends BaseEntity {
 	@OneToMany(() => TableEntity, (table) => table.project)
 	public tables: TableEntity[];
 
-	constructor(name: string) {
+	constructor(id: UUID, name: string) {
 		super();
+		this.id = id;
 		this.name = name;
 	}
 

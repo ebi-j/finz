@@ -12,6 +12,7 @@ export class GetProjectsHandler implements IQueryHandler<GetProjects> {
 	public async execute(query: GetProjects): Promise<ListViewModel<ProjectListItem>> {
 		const [projects, total] = await this.projectRepository
 			.createQueryBuilder('project')
+			.orderBy('project.updatedAt', 'DESC')
 			.select(['project.id', 'project.name'])
 			.skip(query.filter.page * query.filter.limit)
 			.take(query.filter.limit)

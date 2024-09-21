@@ -7,8 +7,9 @@ import { TypeOrmModule } from '@nestjs/typeorm';
 import { ProjectEntity } from '../common/entity';
 import { GetProjectsHandler } from '../common/query/project/handler/GetProjectsHandler';
 import { TableEntity } from '../common/entity/table.entity';
+import { PatchProjectHandler } from '../common/command/project/handler/PatchProjectHandler';
 
-const commandHandlers = [CreateProjectHandler];
+const commandHandlers = [CreateProjectHandler, PatchProjectHandler];
 const queryHandlers = [GetProjectsHandler];
 
 @Module({

@@ -15,3 +15,14 @@ export const post = async <T>(url: string, data: T): Promise<T> => {
 	});
 	return response.json() as Promise<T>;
 };
+
+export const patch = async <T>(url: string, data: T): Promise<T> => {
+	const response = await fetch(`${BASE_URL}${url}`, {
+		method: 'PATCH',
+		headers: {
+			'Content-Type': 'application/json',
+		},
+		body: JSON.stringify(data),
+	});
+	return response.json() as Promise<T>;
+};

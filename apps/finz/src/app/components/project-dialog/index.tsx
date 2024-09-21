@@ -4,44 +4,55 @@ import { Button } from '../../../packages/ui/atoms/button/Button';
 import { Dialog } from '../../../packages/ui/organisms/dialog/Dialog';
 import { useContext } from 'react';
 import { DialogContext } from '../../../packages/ui/organisms/dialog/context';
-import { post } from '../../../packages/shared/httpUtil';
+import { post, patch } from '../../../packages/shared/httpUtil';
+import { UUID } from 'crypto';
 
 interface FormData {
 	name: string;
 }
 
-interface UseCreateProjectDialogProps {
-	onCreated: () => void;
+interface ProjectDialogProps {
+	id?: UUID;
+	name?: string;
+	onSubmittedSuccessful: () => void;
 }
 
-export const useCreateProjectDialog = ({ onCreated }: UseCreateProjectDialogProps) => {
+export const useProjectDialog = () => {
 	const dialogName = 'create-project';
 	const { open, close, isOpen } = useContext(DialogContext);
 
-	const openCreateProjectDialog = () => {
+	const openProjectDialog = () => {
 		open(dialogName);
 	};
 
-	const closeCreateProjectDialog = () => {
+	const closeProjectDialog = () => {
 		close(dialogName);
 	};
 
-	const isCreateProjectDialogOpen = isOpen(dialogName);
+	const isProjectDialogOpen = isOpen(dialogName);
 
-	const CreateProjectDialog = () => {
+	const ProjectDialog = ({ id, name, onSubmittedSuccessful }: ProjectDialogProps) => {
 		const {
 			register,
 			handleSubmit,
 			formState: { errors },
-		} = useForm<FormData>();
+		} = useForm<FormData>({
+			defaultValues: {
+				name: name,
+			},
+		});
 		const { close } = useContext(DialogContext);
 
 		const onSubmit = async (data: FormData): Promise<void> => {
 			try {
-				const result = await post<{ name: string }>('/projects', { name: data.name });
-				console.debug('Project created:', result);
+				if (!id) {
+					await post<{ name: string }>('/projects', { name: data.name });
+				} else {
+					await patch<{ name: string }>(`/projects/${id}`, { name: data.name });
+				}
+
 				close(dialogName);
-				onCreated();
+				onSubmittedSuccessful();
 			} catch (error) {
 				console.error('Error creating project:', error);
 			}
@@ -73,5 +84,5 @@ export const useCreateProjectDialog = ({ onCreated }: UseCreateProjectDialogProp
 		);
 	};
 
-	return { CreateProjectDialog, openCreateProjectDialog, closeCreateProjectDialog, isCreateProjectDialogOpen };
+	return { ProjectDialog, openProjectDialog, closeProjectDialog, isProjectDialogOpen };
 };

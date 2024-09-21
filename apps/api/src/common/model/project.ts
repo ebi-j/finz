@@ -17,7 +17,7 @@ export class Project {
 	}
 
 	public toEntity(): ProjectEntity {
-		return new ProjectEntity(this.name);
+		return new ProjectEntity(this.id, this.name);
 	}
 
 	public toDto(): ProjectDto {
