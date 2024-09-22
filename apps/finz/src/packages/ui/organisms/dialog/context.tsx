@@ -7,9 +7,9 @@ interface DialogContextProps {
 }
 
 export const DialogContext = createContext<DialogContextProps>({
-	isOpen: (name: string) => false,
-	open: (name: string) => undefined,
-	close: (name: string) => undefined,
+	isOpen: () => false,
+	open: () => undefined,
+	close: () => undefined,
 });
 
 export const useDialog = (name: string) => {
@@ -33,8 +33,9 @@ export const DialogProvider = ({
 		setDialogStates((prev) => ({ ...prev, [name]: true }));
 	};
 
-	const close = (name: string): void => {
+	const close = (name: string, onClose?: () => void): void => {
 		setDialogStates((prev) => ({ ...prev, [name]: false }));
+		onClose?.();
 	};
 
 	const isOpen = (name: string): boolean => {

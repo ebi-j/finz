@@ -1,6 +1,6 @@
 import { ListViewModel, ProjectListItem } from '@finz/lib';
 import { useEffect, useState } from 'react';
-import { get } from '../../packages/shared/httpUtil';
+import { callGet } from '../../packages/shared/httpUtil';
 
 const useProjects = () => {
 	const [isLoading, setIsLoading] = useState(true);
@@ -15,7 +15,7 @@ const useProjects = () => {
 	useEffect(() => {
 		const fetchData = async () => {
 			try {
-				const result = await get<ListViewModel<ProjectListItem>>('/projects');
+				const result = await callGet<ListViewModel<ProjectListItem>>('/projects');
 				setProjects(result);
 			} catch (error) {
 				console.error('Error loading projects:', error);

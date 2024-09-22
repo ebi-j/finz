@@ -11,6 +11,7 @@ import { UUID } from 'crypto';
 import { PatchProject } from '../common/command/project/PatchProject';
 import { ProjectPatchedResponse } from './response/ProjectPatchedResponse';
 import { ListViewModel, ProjectListItem } from '@finz/lib';
+import { DeleteProject } from '../common/command/project/DeleteProject';
 
 @Injectable()
 export class ProjectsService {
@@ -42,5 +43,9 @@ export class ProjectsService {
 			name: projectDto.name,
 			updatedAt: projectDto.updatedAt,
 		} as ProjectPatchedResponse;
+	}
+
+	public async deleteProject(id: UUID): Promise<unknown> {
+		return this.commandBus.execute<DeleteProject>(new DeleteProject(id));
 	}
 }

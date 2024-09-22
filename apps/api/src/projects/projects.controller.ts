@@ -72,7 +72,10 @@ export class ProjectsController {
 
 	@Delete(':id')
 	@ApiParam({ name: 'id', type: String })
-	public deleteProject(@Param('id', ParseUUIDPipe) id: UUID) {
-		return { id };
+	@ApiOkResponse({ description: 'Project updated successfully' })
+	@ApiNotFoundResponse({ description: 'Project not found' })
+	@ApiInternalServerErrorResponse({ description: 'Internal server error' })
+	public async deleteProject(@Param('id', ParseUUIDPipe) id: UUID) {
+		return this.projectsService.deleteProject(id);
 	}
 }

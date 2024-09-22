@@ -12,6 +12,8 @@ module.exports = {
 		extend: {
 			colors: {
 				'color-primary': colors.teal[600],
+				'color-warning': colors.red[500],
+				'color-alert': colors.red[700],
 			},
 			fontSize: {
 				'2rem': '2rem',

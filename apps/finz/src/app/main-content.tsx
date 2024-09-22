@@ -5,24 +5,28 @@ import { useProjectDialog } from './components/project-dialog';
 import { useProjects } from './hooks/useProjects';
 import { SideMenuItem } from '../packages/ui/molecules/side-menu-item/SideMenuItem';
 import { UUID } from 'crypto';
-import { useState } from 'react';
-import { ProjectListItem } from '@finz/lib';
 import { Skeleton } from '../packages/ui/atoms/skeleton/Skeleton';
 
 const MainContent = () => {
 	const { isLoading: isProjectsRequestLoading, setShouldReload: setShouldReloadProjects, projects } = useProjects();
-	const [projectInEdit, setProjectInEdit] = useState<ProjectListItem>();
-	const { ProjectDialog, openProjectDialog } = useProjectDialog();
+	const { ProjectDialog, openProjectDialog } = useProjectDialog(() => setShouldReloadProjects(true));
+
+	const createProject = () => {
+		openProjectDialog('create');
+	};
 
 	const renameProject = (id: UUID) => {
-		setProjectInEdit(projects.items.find((i) => i.id === id));
-		//setShouldReloadProjects(true);
-		openProjectDialog();
+		openProjectDialog(
+			'update',
+			projects.items.find((i) => i.id === id),
+		);
 	};
 
 	const deleteProject = (id: UUID) => {
-		console.debug(id);
-		//setShouldReloadProjects(true);
+		openProjectDialog(
+			'delete',
+			projects.items.find((i) => i.id === id),
+		);
 	};
 
 	return (
@@ -31,7 +35,7 @@ const MainContent = () => {
 			<div className="w-[260px] flex flex-col divide-y divide-solid gap-y-2">
 				<div className="p-4 flex items-start justify-between">
 					<PageSubTitle className="text-color-primary">Projects</PageSubTitle>
-					<IconButton title="Create Project" variant="primary" size="l" onClick={openProjectDialog}>
+					<IconButton title="Create Project" variant="primary" size="l" onClick={createProject}>
 						<SquareAdd />
 					</IconButton>
 				</div>
@@ -65,11 +69,7 @@ const MainContent = () => {
 			<div className="flex-1 bg-gray-100"></div>
 
 			{/* dialog */}
-			<ProjectDialog
-				id={projectInEdit?.id}
-				name={projectInEdit?.name}
-				onSubmittedSuccessful={() => setShouldReloadProjects(true)}
-			/>
+			<ProjectDialog />
 		</div>
 	);
 };

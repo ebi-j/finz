@@ -8,8 +8,9 @@ import { ProjectEntity } from '../common/entity';
 import { GetProjectsHandler } from '../common/query/project/handler/GetProjectsHandler';
 import { TableEntity } from '../common/entity/table.entity';
 import { PatchProjectHandler } from '../common/command/project/handler/PatchProjectHandler';
+import { DeleteProjectHandler } from '../common/command/project/handler/DeleteProjectHandler';
 
-const commandHandlers = [CreateProjectHandler, PatchProjectHandler];
+const commandHandlers = [CreateProjectHandler, PatchProjectHandler, DeleteProjectHandler];
 const queryHandlers = [GetProjectsHandler];
 
 @Module({

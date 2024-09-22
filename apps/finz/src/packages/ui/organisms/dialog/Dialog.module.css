@@ -13,3 +13,7 @@
 .title-info {
   @apply text-color-primary;
 }
+
+.title-warning {
+  @apply text-color-alert;
+}

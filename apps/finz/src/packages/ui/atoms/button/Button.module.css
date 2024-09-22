@@ -35,11 +35,19 @@
 }
 
 .btn-warn {
-  @apply btn-base bg-white text-red-700;
+  @apply btn-base bg-white text-color-alert;
 }
 
 .btn-warn:hover {
   @apply bg-red-50;
+}
+
+.btn-alert {
+  @apply btn-base bg-color-warning text-white;
+}
+
+.btn-alert:hover {
+  @apply bg-color-alert;
 }
 
 .l {
