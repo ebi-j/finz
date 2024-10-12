@@ -35,7 +35,6 @@
         "@typescript-eslint/ban-tslint-comment": "error",
         "@typescript-eslint/consistent-indexed-object-style": "error",
         "@typescript-eslint/consistent-type-assertions": "error",
-        "@typescript-eslint/consistent-type-definitions": "error",
         "@typescript-eslint/consistent-type-exports": "error",
         // Note: you must disable the base rule as it can report incorrect errors
         "default-param-last": "off",

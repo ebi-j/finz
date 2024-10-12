@@ -6,6 +6,8 @@ import { useProjects } from './hooks/useProjects';
 import { SideMenuItem } from '../packages/ui/molecules/side-menu-item/SideMenuItem';
 import { UUID } from 'crypto';
 import { Skeleton } from '../packages/ui/atoms/skeleton/Skeleton';
+import { Outlet } from 'react-router-dom';
+import styles from './MainContent.module.css';
 
 const MainContent = () => {
 	const { isLoading: isProjectsRequestLoading, setShouldReload: setShouldReloadProjects, projects } = useProjects();
@@ -32,7 +34,9 @@ const MainContent = () => {
 	return (
 		<div className="flex h-screen">
 			{/* left panel */}
-			<div className="w-[260px] flex flex-col divide-y divide-solid gap-y-2">
+			<div
+				className={`w-[260px] flex flex-col divide-y divide-solid gap-y-2 border-r border-gray-300 ${styles.SideMenuShadow}`}
+			>
 				<div className="p-4 flex items-start justify-between">
 					<PageSubTitle className="text-color-primary">Projects</PageSubTitle>
 					<IconButton title="Create Project" variant="primary" size="l" onClick={createProject}>
@@ -66,7 +70,9 @@ const MainContent = () => {
 			</div>
 
 			{/* main area */}
-			<div className="flex-1 bg-gray-100"></div>
+			<div className="flex-1 p-4 h-full">
+				<Outlet />
+			</div>
 
 			{/* dialog */}
 			<ProjectDialog />

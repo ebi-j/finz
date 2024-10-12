@@ -9,12 +9,13 @@ import { GetProjectsHandler } from '../common/query/project/handler/GetProjectsH
 import { TableEntity } from '../common/entity/table.entity';
 import { PatchProjectHandler } from '../common/command/project/handler/PatchProjectHandler';
 import { DeleteProjectHandler } from '../common/command/project/handler/DeleteProjectHandler';
+import { ColumnEntity } from '../common/entity/column.entity';
 
 const commandHandlers = [CreateProjectHandler, PatchProjectHandler, DeleteProjectHandler];
 const queryHandlers = [GetProjectsHandler];
 
 @Module({
-	imports: [CqrsModule, TypeOrmModule.forFeature([ProjectEntity, TableEntity])],
+	imports: [CqrsModule, TypeOrmModule.forFeature([ProjectEntity, TableEntity, ColumnEntity])],
 	providers: [ProjectsService, ...commandHandlers, ...queryHandlers],
 	controllers: [ProjectsController],
 })

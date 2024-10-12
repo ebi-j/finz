@@ -16,7 +16,7 @@ const Input = forwardRef<HTMLInputElement, InputProps>(({ label, error, ...other
 			<Label>{label}</Label>
 			<BaseInput
 				className={clsx(
-					'block w-full rounded-lg border border-solid border-white bg-gray-100 py-3 px-3 text-sm outline-none',
+					'block w-full rounded-lg border border-solid border-white bg-gray-100 p-3 text-sm outline-none',
 					'hover:bg-white hover:border hover:border-solid hover:border-teal-600',
 					'focus:bg-white focus:border focus:border-solid focus:border-teal-600 focus:outline-none',
 					'-[focus]:outline-2 data-[focus]:-outline-offset-2 data-[focus]:outline-white/25',

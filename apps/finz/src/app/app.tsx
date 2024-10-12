@@ -1,5 +1,5 @@
 import { DialogProvider } from '../packages/ui/organisms/dialog/context';
-import { MainContent } from './main-content';
+import { MainContent } from './MainContent';
 
 export function App() {
 	return (

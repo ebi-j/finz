@@ -4,8 +4,8 @@ interface LabelProps extends Omit<BaseLabelProps, 'children'> {
 	children: string;
 }
 
-const Label = ({ children, ...other }: LabelProps) => (
-	<BaseLabel className={`font-sans text-sm font-normal leading-5`} {...other}>
+const Label = ({ children, ...others }: LabelProps) => (
+	<BaseLabel className={`font-sans text-sm font-normal leading-5`} {...others}>
 		{children}
 	</BaseLabel>
 );

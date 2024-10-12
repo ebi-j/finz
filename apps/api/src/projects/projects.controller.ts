@@ -55,7 +55,6 @@ export class ProjectsController {
 	@Get(':id')
 	@ApiParam({ name: 'id', type: String })
 	public getProjectById(@Param('id', ParseUUIDPipe) id: UUID) {
-		console.debug(typeof id);
 		return { id };
 	}
 

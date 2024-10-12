@@ -1,12 +1,7 @@
-import { PropertyState } from '@finz/lib';
+import { PropertyState, PropertyViewModel } from '@finz/lib';
 import { BodyRegular } from '../typography/Typography';
 
-interface PropertyProps {
-	name: string;
-	state: PropertyState;
-}
-
-const Property = ({ name, state }: PropertyProps) => {
+const Property = ({ name, state, className }: PropertyViewModel) => {
 	const getStateColor = (state: PropertyState): string => {
 		switch (state) {
 			case 'added':
@@ -20,12 +15,15 @@ const Property = ({ name, state }: PropertyProps) => {
 		}
 	};
 
+	const highlight = () => {
+		console.debug(111);
+	};
+
 	return (
-		<div className={`px-2 py-1 ${getStateColor(state)}`}>
+		<div className={`px-2 py-1 ${getStateColor(state)} ${className}`} onClick={highlight}>
 			<BodyRegular>{name}</BodyRegular>
 		</div>
 	);
 };
 
 export { Property };
-export type { PropertyProps };

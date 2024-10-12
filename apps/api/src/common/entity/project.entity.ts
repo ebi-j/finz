@@ -14,7 +14,7 @@ export class ProjectEntity extends BaseEntity {
 	})
 	public name: string;
 
-	@OneToMany(() => TableEntity, (table) => table.project)
+	@OneToMany(() => TableEntity, (table) => table.project, { cascade: true })
 	public tables: TableEntity[];
 
 	constructor(id: UUID, name: string) {

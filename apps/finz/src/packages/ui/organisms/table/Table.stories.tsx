@@ -6,9 +6,14 @@ import { TableState, TableStateList } from '@finz/lib';
 const meta: Meta<typeof Table> = {
 	component: Table,
 	argTypes: {
-		state: {
-			options: TableStateList as readonly TableState[],
-			control: { type: 'select' },
+		model: {
+			state: {
+				options: TableStateList as readonly TableState[],
+				control: { type: 'select' },
+			},
+		},
+		focused: {
+			control: { type: 'boolean' },
 		},
 	},
 };
@@ -18,11 +23,14 @@ type Story = StoryObj<typeof Table>;
 
 export const Default: Story = {
 	args: {
-		name: 'Table 1',
-		state: 'committed',
-		propertyList: [
-			{ name: 'Property 1', state: 'committed' },
-			{ name: 'Property 2', state: 'added' },
-		],
+		model: {
+			name: 'Table 1',
+			state: 'committed',
+			propertyList: [
+				{ name: 'Property 1', state: 'committed' },
+				{ name: 'Property 2', state: 'added' },
+			],
+		},
+		focused: false,
 	},
 };
