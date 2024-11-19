@@ -6,14 +6,14 @@ import { FieldError } from '../../atoms/FieldError/FieldError';
 
 interface InputProps extends Omit<BaseInputProps, 'name'> {
 	name: string;
-	label: string;
+	label?: string;
 	error?: string;
 }
 
 const Input = forwardRef<HTMLInputElement, InputProps>(({ label, error, ...others }, ref) => {
 	return (
 		<Field className="w-full flex flex-col gap-2">
-			<Label>{label}</Label>
+			{label && <Label>{label}</Label>}
 			<BaseInput
 				className={clsx(
 					'block w-full rounded-lg border border-solid border-white bg-gray-100 p-3 text-sm outline-none',

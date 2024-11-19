@@ -18,5 +18,6 @@ type Story = StoryObj<typeof Property>;
 export const Default: Story = {
 	args: {
 		name: 'Property 1',
+		state: 'committed',
 	},
 };

@@ -3,7 +3,15 @@
 }
 
 .btn-icon-primary:hover {
-  @apply text-teal-700;
+  @apply text-color-primary-hover;
+}
+
+.btn-icon-alert {
+  @apply text-color-alert;
+}
+
+.btn-icon-alert:hover {
+  @apply text-color-alert-hover;
 }
 
 .btn-base {
@@ -23,7 +31,7 @@
 }
 
 .btn-primary:hover {
-  @apply bg-teal-700;
+  @apply bg-color-primary-hover;
 }
 
 .btn-text {
@@ -55,7 +63,7 @@
 }
 
 .m {
-  @apply text-lg;
+  @apply text-lg pt-2 pb-2 pl-3 pr-3;
 }
 
 .s {

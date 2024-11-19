@@ -1,9 +1,15 @@
 import { useParams } from 'react-router-dom';
-import { ReactFlow, useNodesState, useEdgesState, addEdge, Connection, Background, Controls } from '@xyflow/react';
+import { ReactFlow, useNodesState, useEdgesState, addEdge, Connection, Background } from '@xyflow/react';
 import { useCallback } from 'react';
-import { initialNodes, nodeTypes } from './nodes';
-import { TableNode } from './nodes/TableNode';
+import { InitializeNewNode, initialNodes, nodeTypes } from './nodes';
 import '@xyflow/react/dist/style.css';
+import { Button } from '../../../packages/ui/atoms/button/Button';
+import { Input } from '../../../packages/ui/molecules/input/Input';
+import { useForm } from 'react-hook-form';
+
+interface CommitFormData {
+	message: string;
+}
 
 const Canvas = () => {
 	const { projectId } = useParams();
@@ -13,28 +19,56 @@ const Canvas = () => {
 
 	const onConnect = useCallback((params: Connection) => setEdges((eds) => addEdge(params, eds)), [setEdges]);
 
-	const handleNodeClick = (_: React.MouseEvent, node: TableNode) => {
-		nodes.forEach((n) => (n.data.focused = n.id === node.id));
+	const addNewTable = () => {
+		setNodes([...nodes, InitializeNewNode()]);
 	};
 
-	const handlePanelClick = (_: React.MouseEvent) => {
-		nodes.forEach((n) => (n.data.focused = false));
+	const {
+		register,
+		handleSubmit,
+		formState: { errors },
+	} = useForm<CommitFormData>({
+		defaultValues: {
+			message: '',
+		},
+	});
+
+	const onSubmit = (data: CommitFormData) => {
+		console.debug(data);
 	};
 
 	return (
-		<ReactFlow
-			nodes={nodes}
-			nodeTypes={nodeTypes}
-			edges={edges}
-			onNodesChange={onNodesChange}
-			onEdgesChange={onEdgesChange}
-			onConnect={onConnect}
-			onNodeClick={handleNodeClick}
-			onPaneClick={handlePanelClick}
-			fitView
-		>
-			<Background />
-		</ReactFlow>
+		<>
+			<ReactFlow
+				nodes={nodes}
+				nodeTypes={nodeTypes}
+				edges={edges}
+				onNodesChange={onNodesChange}
+				onEdgesChange={onEdgesChange}
+				onConnect={onConnect}
+				fitView
+			>
+				<Background />
+			</ReactFlow>
+			<div className="p-4 h-[260px] border-t border-gray-300 flex flex-col justify-between">
+				<div className="flex">
+					<Button variant="primary" onClick={addNewTable}>
+						New Table
+					</Button>
+				</div>
+
+				<form onSubmit={handleSubmit(onSubmit)} className="inline-form-layout">
+					<Input
+						placeholder="Commit Message"
+						{...register('message', { required: 'Project name is required' })}
+						error={errors.message?.message}
+					/>
+					<Button variant="primary" size="m" type="submit">
+						Commit
+					</Button>
+				</form>
+			</div>
+		</>
 	);
 };
 

@@ -1,3 +1,4 @@
+import { UUID } from "crypto";
 import { PropertyState, TableState } from "./State";
 
 export interface TableViewModel {
@@ -7,7 +8,7 @@ export interface TableViewModel {
 }
 
 export interface PropertyViewModel {
+	id: UUID;
   name: string;
 	state: PropertyState;
-	className?: string;
 }

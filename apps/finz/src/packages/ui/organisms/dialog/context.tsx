@@ -27,7 +27,7 @@ export const DialogProvider = ({
 	states?: Record<string, boolean>;
 	children: React.ReactNode | React.ReactNode[];
 }) => {
-	const [dialogStates, setDialogStates] = useState<Record<string, boolean>>(states);
+	const [dialogStates, setDialogStates] = useState<Record<string, boolean>>(states ?? []);
 
 	const open = (name: string): void => {
 		setDialogStates((prev) => ({ ...prev, [name]: true }));

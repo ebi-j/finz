@@ -32,7 +32,7 @@ const MainContent = () => {
 	};
 
 	return (
-		<div className="flex h-screen">
+		<div className="flex h-screen box-border">
 			{/* left panel */}
 			<div
 				className={`w-[260px] flex flex-col divide-y divide-solid gap-y-2 border-r border-gray-300 ${styles.SideMenuShadow}`}
@@ -70,7 +70,7 @@ const MainContent = () => {
 			</div>
 
 			{/* main area */}
-			<div className="flex-1 p-4 h-full">
+			<div className="flex-1 flex flex-col">
 				<Outlet />
 			</div>
 

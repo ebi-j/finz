@@ -10,3 +10,7 @@
 .form-layout {
   @apply flex flex-col gap-4;
 }
+
+.inline-form-layout {
+  @apply flex flex-row gap-4;
+}
